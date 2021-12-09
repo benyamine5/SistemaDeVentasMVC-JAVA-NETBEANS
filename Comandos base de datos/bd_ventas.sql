@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.1
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-12-2021 a las 23:01:12
--- Versión del servidor: 10.4.8-MariaDB
--- Versión de PHP: 7.3.10
+-- Tiempo de generación: 09-12-2021 a las 04:50:33
+-- Versión del servidor: 10.4.20-MariaDB
+-- Versión de PHP: 8.0.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -41,7 +40,8 @@ CREATE TABLE `cliente` (
 --
 
 INSERT INTO `cliente` (`IdCliente`, `Dni`, `Nombres`, `Direccion`, `Estado`) VALUES
-(10, '105554', 'Edgardo polo', 'calle 30', '1');
+(11, '10457263', 'Benjamin Guardo Barrios', 'Calle 30 No. 10 - 200', '1'),
+(12, '1234567', 'Olga Barrios Rico', 'Calle 24 No. 28 - 29', '0');
 
 -- --------------------------------------------------------
 
@@ -56,6 +56,14 @@ CREATE TABLE `detalle_ventas` (
   `Cantidad` int(11) NOT NULL,
   `PrecioVenta` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `detalle_ventas`
+--
+
+INSERT INTO `detalle_ventas` (`IdDetalleVentas`, `Ventas_IdVentas`, `Producto_IdProducto`, `Cantidad`, `PrecioVenta`) VALUES
+(1, 1, 87944, 2, 2500000),
+(2, 1, 878, 6, 14000);
 
 -- --------------------------------------------------------
 
@@ -76,8 +84,12 @@ CREATE TABLE `producto` (
 --
 
 INSERT INTO `producto` (`IdProducto`, `Nombre_Producto`, `Precio`, `Stock`, `Estado`) VALUES
-(878, 'Jabon protex', 54000, 200, '1'),
-(4578, 'Jabon protex', 54000, 200, '1');
+(878, 'Jabon Protex última generación', 14000, 62, '1'),
+(4578, 'Jabon Dove', 21500, 10, '1'),
+(8748, 'Honor 20', 1200000, 20, '1'),
+(48788, 'Abanico Samurai Turbo silence', 240000, 10, '1'),
+(87944, 'Computador hp Pavilion', 2500000, 2, '1'),
+(87964, 'Monitor Hp LE1851w', 195000, 5, '1');
 
 -- --------------------------------------------------------
 
@@ -87,11 +99,11 @@ INSERT INTO `producto` (`IdProducto`, `Nombre_Producto`, `Precio`, `Stock`, `Est
 
 CREATE TABLE `vendedor` (
   `IdVendedor` int(11) NOT NULL,
-  `Dni` varchar(8) NOT NULL,
+  `Dni` varchar(15) NOT NULL,
   `Nombres` varchar(255) NOT NULL,
-  `Telefono` varchar(9) NOT NULL,
+  `Telefono` varchar(15) NOT NULL,
   `Estado` varchar(1) NOT NULL,
-  `User` varchar(8) NOT NULL
+  `User` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -99,7 +111,8 @@ CREATE TABLE `vendedor` (
 --
 
 INSERT INTO `vendedor` (`IdVendedor`, `Dni`, `Nombres`, `Telefono`, `Estado`, `User`) VALUES
-(1, '12345678', 'Benjamin Guardo', '321878986', '1', 'emp01');
+(6, '1045735040', 'Benjamin Guardo Barrios', '3218789867', '1', 'AdminSupremo555'),
+(7, '39050042', 'Olga Barrios Rico', '3057982053', '1', 'BarriosOlga05');
 
 -- --------------------------------------------------------
 
@@ -118,6 +131,13 @@ CREATE TABLE `ventas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
+-- Volcado de datos para la tabla `ventas`
+--
+
+INSERT INTO `ventas` (`IdVentas`, `IdCliente`, `IdVendedor`, `NumeroVentas`, `FechaVentas`, `Monto`, `Estado`) VALUES
+(1, 0, 1, '', '2021-12-08', 5084000, '1');
+
+--
 -- Índices para tablas volcadas
 --
 
@@ -126,6 +146,12 @@ CREATE TABLE `ventas` (
 --
 ALTER TABLE `cliente`
   ADD PRIMARY KEY (`IdCliente`);
+
+--
+-- Indices de la tabla `detalle_ventas`
+--
+ALTER TABLE `detalle_ventas`
+  ADD PRIMARY KEY (`IdDetalleVentas`);
 
 --
 -- Indices de la tabla `producto`
@@ -153,13 +179,25 @@ ALTER TABLE `ventas`
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `IdCliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `IdCliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT de la tabla `detalle_ventas`
+--
+ALTER TABLE `detalle_ventas`
+  MODIFY `IdDetalleVentas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `vendedor`
+--
+ALTER TABLE `vendedor`
+  MODIFY `IdVendedor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `ventas`
 --
 ALTER TABLE `ventas`
-  MODIFY `IdVentas` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `IdVentas` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

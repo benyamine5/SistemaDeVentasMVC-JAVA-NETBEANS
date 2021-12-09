@@ -6,12 +6,34 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 public class ProductosDAO implements CRUD{
     Connection con;
     Conexion cn = new Conexion();
     PreparedStatement ps;
     ResultSet rs;
+    
+    public Productos listarID(int id){
+        Productos p = new Productos(); 
+        String sql = "select * from producto where IdProducto=?";
+        try {
+            con = cn.Conectar();
+            ps=con.prepareStatement(sql);
+            ps.setInt(1, id);
+            rs=ps.executeQuery();
+            while (rs.next()) {                
+                p.setIdProducto(rs.getInt(1));
+                p.setNombre_Producto(rs.getString(2));
+                p.setPrecio(rs.getDouble(3));
+                p.setStock(rs.getInt(4));
+                p.setEstado(rs.getString(5));
+            }
+        } catch (Exception e) {
+        }
+        return p;
+                
+    }
     @Override
     public List listar() {
          List<Productos> lista = new ArrayList<>();
@@ -37,7 +59,7 @@ public class ProductosDAO implements CRUD{
     @Override
     public int add(Object[] o) {
         int r=0;
-        String sql="insert into producto(Nombre_Producto,Precio,Stock,Estado)values(?,?,?,?)";
+        String sql="insert into producto(IdProducto,Nombre_Producto,Precio,Stock,Estado)values(?,?,?,?,?)";
         try {
             con=cn.Conectar();
             ps=con.prepareStatement(sql);
@@ -45,8 +67,10 @@ public class ProductosDAO implements CRUD{
             ps.setObject(2, o[1]);
             ps.setObject(3, o[2]);
             ps.setObject(4, o[3]);   
+            ps.setObject(5, o[4]);   
             r= ps.executeUpdate();
         } catch (Exception e) {
+            
         }
         return r;
     }

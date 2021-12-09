@@ -2,19 +2,19 @@ package vistas;
 
 import java.awt.Color;
 import javax.swing.JOptionPane;
-import modelo.EntidadVendedor;
-import modelo.VendedorDAO;
+import modelo.Vendedores;
+import modelo.VendedoresDAO;
 
 public class LoginForm extends javax.swing.JFrame {
 
-    VendedorDAO vdao = new VendedorDAO();
-    EntidadVendedor ev = new EntidadVendedor();
+    VendedoresDAO vdao = new VendedoresDAO();
+    Vendedores ev = new Vendedores();
 
     public LoginForm() {
         initComponents();
         this.setLocationRelativeTo(null);
-        txtUser.setText("emp01");
-        txtPass.setText("12345678");
+        txtUser.setText("BarriosOlga05");
+        txtPass.setText("39050042");
         this.getContentPane().setBackground(Color.GRAY);
     }
 

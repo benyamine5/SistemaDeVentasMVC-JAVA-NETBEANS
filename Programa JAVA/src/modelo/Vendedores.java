@@ -9,7 +9,7 @@ package modelo;
  *
  * @author Benjamin
  */
-public class EntidadVendedor {
+public class Vendedores {
     int id;
     String dni;
     String nom;
@@ -17,10 +17,10 @@ public class EntidadVendedor {
     String estado;
     String user;
 
-    public EntidadVendedor() {
+    public Vendedores() {
     }
 
-    public EntidadVendedor(int id, String dni, String nom, String tel, String estado, String user) {
+    public Vendedores(int id, String dni, String nom, String tel, String estado, String user) {
         this.id = id;
         this.dni = dni;
         this.nom = nom;
